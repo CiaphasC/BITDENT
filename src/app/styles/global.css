@@ -19,7 +19,7 @@
   --font-display: "Montserrat", sans-serif;
   --font-body: "Open Sans", sans-serif;
 
-  --shadow-premium: 0 30px 60px -15px rgba(13, 17, 23, 0.1);
+  --shadow-elevated: 0 30px 60px -15px rgba(13, 17, 23, 0.1);
   --shadow-subtle: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
 }
 
@@ -55,7 +55,7 @@ body {
   -webkit-backdrop-filter: blur(24px) saturate(150%);
 }
 
-/* Fallback: if the browser cannot apply backdrop blur, keep navbar premium and readable */
+/* Fallback: if the browser cannot apply backdrop blur, keep navbar readable and refined */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass-header {
     background: rgba(252, 251, 249, 0.94);

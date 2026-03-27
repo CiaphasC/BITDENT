@@ -106,7 +106,7 @@ export const HeroSection = () => {
             }}
             type="button"
           >
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2a2d34] shadow-premium transition-colors duration-300 group-hover:bg-[#2d6a4f] md:h-20 md:w-20">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2a2d34] shadow-elevated transition-colors duration-300 group-hover:bg-[#2d6a4f] md:h-20 md:w-20">
               <PlayIcon className="ml-1 h-6 w-6 text-white" />
             </span>
             <span className="mt-6 translate-y-2 text-[10px] font-display font-medium tracking-[0.2em] text-white uppercase opacity-0 drop-shadow-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:text-xs">

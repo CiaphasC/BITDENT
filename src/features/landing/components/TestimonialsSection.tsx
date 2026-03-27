@@ -33,7 +33,7 @@ export const TestimonialsSection = () => {
         <div className="scroll-reveal relative mx-auto w-full max-w-5xl">
           <button
             aria-label="Testimonio anterior"
-            className="group absolute top-1/2 -left-4 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-midnight-800/80 text-white shadow-premium backdrop-blur-sm transition-all duration-300 hover:border-verde-500 hover:bg-verde-500 focus:outline-none md:-left-8 md:h-14 md:w-14 lg:-left-12"
+            className="group absolute top-1/2 -left-4 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-midnight-800/80 text-white shadow-elevated backdrop-blur-sm transition-all duration-300 hover:border-verde-500 hover:bg-verde-500 focus:outline-none md:-left-8 md:h-14 md:w-14 lg:-left-12"
             id="slider-prev"
             onClick={previous}
             type="button"
@@ -43,7 +43,7 @@ export const TestimonialsSection = () => {
 
           <button
             aria-label="Siguiente testimonio"
-            className="group absolute top-1/2 -right-4 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-midnight-800/80 text-white shadow-premium backdrop-blur-sm transition-all duration-300 hover:border-verde-500 hover:bg-verde-500 focus:outline-none md:-right-8 md:h-14 md:w-14 lg:-right-12"
+            className="group absolute top-1/2 -right-4 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-midnight-800/80 text-white shadow-elevated backdrop-blur-sm transition-all duration-300 hover:border-verde-500 hover:bg-verde-500 focus:outline-none md:-right-8 md:h-14 md:w-14 lg:-right-12"
             id="slider-next"
             onClick={next}
             type="button"

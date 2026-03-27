@@ -23,7 +23,20 @@ export const BenefitsSection = () => (
     <div className="mx-auto max-w-[90rem] px-8 md:px-16">
       <SectionHeading
         align="center"
-        badge="Garantía 3Bitdent"
+        badge={
+          <span className="inline-flex items-center gap-2">
+            <span>Garantía</span>
+            <img
+              alt="BITDENT"
+              className="h-3.5 w-auto"
+              decoding="async"
+              height={14}
+              src="/brand/logo.png"
+              width={52}
+            />
+            <span>Bitdent</span>
+          </span>
+        }
         className="mb-20"
         title="En Bitdent ofrecemos este tratamiento para:"
       />
@@ -31,7 +44,7 @@ export const BenefitsSection = () => (
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {benefits.map((benefit) => (
           <article
-            className="group scroll-reveal relative overflow-hidden border border-stone-100 bg-white p-12 text-center shadow-subtle transition-shadow duration-500 hover:shadow-premium"
+            className="group scroll-reveal relative overflow-hidden border border-stone-100 bg-white p-12 text-center shadow-subtle transition-shadow duration-500 hover:shadow-elevated"
             key={benefit.id}
             style={{ transitionDelay: `${benefit.delayMs}ms` }}
           >

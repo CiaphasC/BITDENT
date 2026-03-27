@@ -8,7 +8,7 @@ export const FooterSection = () => (
         <div>
           <h3 className="mb-2 flex items-center gap-2 text-2xl font-display font-semibold tracking-[0.15em] text-white">
             <InfoCircleIcon className="h-6 w-6 text-verde-500" />
-            3BITDENT
+            BITDENT
           </h3>
           <p className="pl-8 text-[10px] font-display tracking-[0.3em] text-stone-400 uppercase">
             Odontología de Alta Especialidad

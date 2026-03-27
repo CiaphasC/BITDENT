@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import type { ReactNode } from 'react';
 
 interface SectionHeadingProps {
-  badge: string;
+  badge: ReactNode;
   title: ReactNode;
   className?: string;
   align?: 'left' | 'center';

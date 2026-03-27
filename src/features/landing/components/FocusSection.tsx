@@ -51,7 +51,7 @@ export const FocusSection = () => {
           <div className="editorial-img-wrapper scroll-reveal relative mt-6 w-full overflow-hidden rounded-2xl border border-stone-200/60 bg-white shadow-subtle lg:mt-0 lg:h-[600px] lg:w-1/2 lg:rounded-none lg:border-0 lg:bg-transparent lg:shadow-none">
             <img
               alt="Instrumentos dentales"
-              className="h-[360px] w-full object-cover object-[center_28%] shadow-premium sm:h-[440px] lg:h-full lg:object-center"
+              className="h-[360px] w-full object-cover object-[center_28%] shadow-elevated sm:h-[440px] lg:h-full lg:object-center"
               src={media.profileInstruments}
             />
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-midnight-900/50 to-transparent lg:rounded-none" />
