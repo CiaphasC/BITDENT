@@ -32,11 +32,11 @@ export const LandingPage = () => {
 
       <a
         aria-label="WhatsApp"
-        className="fixed right-4 z-[70] flex h-14 w-14 items-center justify-center rounded-full border border-white/35 bg-verde-500 text-white shadow-premium transition-transform duration-300 hover:scale-105 active:scale-95 md:hidden"
+        className="btn-luxury group fixed right-4 z-[70] flex h-14 w-14 items-center justify-center rounded-2xl border border-midnight-900/70 bg-pearl/85 text-midnight-900 shadow-[0_16px_30px_-14px_rgba(13,17,23,0.45)] backdrop-blur-xl transition-all duration-300 active:scale-95 md:hidden"
         href="#agendar"
         style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
       >
-        <WhatsAppIcon className="h-7 w-7" />
+        <WhatsAppIcon className="h-6 w-6 transition-colors duration-500 group-hover:text-white" />
       </a>
     </>
   );
