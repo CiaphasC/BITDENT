@@ -9,6 +9,14 @@ export const NavBar = () => (
   >
     <div className="mx-auto flex max-w-[90rem] items-center justify-between px-8 md:px-16">
       <a className="group flex items-center" href="#hero-section">
+        <img
+          alt="Logo BITDENT"
+          className="mr-3 h-10 w-auto object-contain md:h-11"
+          decoding="async"
+          height={44}
+          src="/brand/logo.png"
+          width={172}
+        />
         <div className="flex flex-col">
           <span className="text-3xl font-serif font-normal tracking-wide text-midnight-900 uppercase">
             BITDENT

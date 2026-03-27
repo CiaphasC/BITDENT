@@ -55,6 +55,14 @@ body {
   -webkit-backdrop-filter: blur(24px) saturate(150%);
 }
 
+/* Fallback: if the browser cannot apply backdrop blur, keep navbar premium and readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-header {
+    background: rgba(252, 251, 249, 0.94);
+    box-shadow: 0 8px 24px rgba(13, 17, 23, 0.06);
+  }
+}
+
 .text-gradient-verde {
   background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
   -webkit-background-clip: text;
