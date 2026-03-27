@@ -37,10 +37,10 @@ export const FooterSection = () => (
 
       <div className="mb-8 px-4 text-center">
         <p className="mx-auto max-w-5xl text-[9px] leading-relaxed font-light text-stone-500">
-          Este sitio no forma parte de Facebook ni de Facebook Inc. Además, este sitio no está
-          avalado por Facebook en modo alguno. Facebook es una marca registrada de Facebook Inc.
-          Los resultados pueden variar y no se garantizan resultados médicos específicos...
-          [Disclaimer completo]
+          En BITDENT trabajamos con un enfoque clínico personalizado para lograr resultados
+          estéticos y funcionales de alta calidad. Cada tratamiento se adapta a las necesidades de
+          cada paciente, por lo que el diagnóstico, los tiempos y la evolución pueden variar según
+          la valoración profesional realizada en consulta.
         </p>
       </div>
 
