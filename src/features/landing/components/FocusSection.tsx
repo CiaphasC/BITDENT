@@ -9,15 +9,15 @@ export const FocusSection = () => {
   useFogScene(fogContainerRef);
 
   return (
-    <section className="relative overflow-hidden bg-white py-32" id="enfoque">
+    <section className="relative overflow-hidden bg-white py-20 md:py-32" id="enfoque">
       <div
         className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-85"
         id="fog-canvas-container"
         ref={fogContainerRef}
       />
 
-      <div className="relative z-10 mx-auto max-w-[90rem] px-8 md:px-16">
-        <div className="flex flex-col items-start gap-16 lg:flex-row lg:gap-24">
+      <div className="relative z-10 mx-auto max-w-[90rem] px-4 sm:px-8 md:px-16">
+        <div className="flex flex-col items-start gap-12 lg:flex-row lg:gap-24">
           <div className="scroll-reveal w-full lg:w-1/2">
             <span className="mb-6 block text-[10px] font-display tracking-[0.3em] text-verde-600 uppercase">
               Perfil del Paciente
@@ -48,13 +48,13 @@ export const FocusSection = () => {
             </div>
           </div>
 
-          <div className="editorial-img-wrapper scroll-reveal relative mt-8 h-[600px] w-full lg:mt-0 lg:w-1/2">
+          <div className="editorial-img-wrapper scroll-reveal relative mt-6 w-full overflow-hidden rounded-2xl border border-stone-200/60 bg-white shadow-subtle lg:mt-0 lg:h-[600px] lg:w-1/2 lg:rounded-none lg:border-0 lg:bg-transparent lg:shadow-none">
             <img
               alt="Instrumentos dentales"
-              className="h-full w-full object-cover shadow-premium"
+              className="h-[360px] w-full object-cover object-[center_28%] shadow-premium sm:h-[440px] lg:h-full lg:object-center"
               src={media.profileInstruments}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-midnight-900/50 to-transparent" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-midnight-900/50 to-transparent lg:rounded-none" />
           </div>
         </div>
       </div>
