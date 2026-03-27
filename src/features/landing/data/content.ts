@@ -119,6 +119,5 @@ export const media = {
     'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80',
   profileInstruments:
     'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80',
-  videoEmbed:
-    'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=1&mute=1',
+  videoEmbed: 'https://fast.wistia.com/embed/medias/eyqogrxnfi',
 };

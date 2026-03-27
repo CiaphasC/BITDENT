@@ -57,7 +57,7 @@ export const TestimonialsSection = () => {
               id="slider-track"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              {testimonials.map((testimonial) => (
+              {testimonials.map((testimonial, index) => (
                 <article className="relative w-full shrink-0 p-8 md:p-12" key={testimonial.id}>
                   <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2">
                     <figure className="group relative aspect-square overflow-hidden">
@@ -67,6 +67,10 @@ export const TestimonialsSection = () => {
                           'h-full w-full object-cover transition-transform duration-700 group-hover:scale-105',
                           testimonial.beforeClassName,
                         )}
+                        decoding="async"
+                        fetchPriority={index === currentIndex ? 'high' : 'low'}
+                        loading={index === currentIndex ? 'eager' : 'lazy'}
+                        sizes="(min-width: 768px) 50vw, 100vw"
                         src={testimonial.beforeImage}
                       />
                     </figure>
@@ -75,6 +79,10 @@ export const TestimonialsSection = () => {
                       <img
                         alt="Después"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        decoding="async"
+                        fetchPriority={index === currentIndex ? 'high' : 'low'}
+                        loading={index === currentIndex ? 'eager' : 'lazy'}
+                        sizes="(min-width: 768px) 50vw, 100vw"
                         src={testimonial.afterImage}
                       />
                       <div className="absolute inset-0 bg-verde-400/20 mix-blend-overlay" />

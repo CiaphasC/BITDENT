@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useRef, type RefObject } from 'react';
-import gsap from 'gsap';
 
 import { media } from '@/features/landing/data/content';
 import { CloseIcon } from '@/shared/ui/icons';
@@ -10,7 +9,24 @@ interface VideoModalProps {
   onClose: () => void;
 }
 
-const VIDEO_IFRAME_AUTOPLAY = media.videoEmbed.replace('autoplay=0', 'autoplay=1');
+const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
+  try {
+    const url = new URL(source);
+
+    if (url.searchParams.has('autoPlay')) {
+      url.searchParams.set('autoPlay', shouldAutoplay ? 'true' : 'false');
+    } else {
+      url.searchParams.set('autoplay', shouldAutoplay ? '1' : '0');
+    }
+
+    return url.toString();
+  } catch {
+    return source;
+  }
+};
+
+const VIDEO_IFRAME_BASE = buildVideoSource(media.videoEmbed, false);
+const VIDEO_IFRAME_AUTOPLAY = buildVideoSource(media.videoEmbed, true);
 
 export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalRootRef = useRef<HTMLDivElement | null>(null);
@@ -38,98 +54,114 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   }, [isOpen, onClose]);
 
   useLayoutEffect(() => {
-    const originNode = originRef.current;
-    const modalRoot = modalRootRef.current;
-    const modalBackground = modalBackgroundRef.current;
-    const modalContent = modalContentRef.current;
-    const modalCloseButton = modalCloseRef.current;
-    const modalCover = modalCoverRef.current;
+    type GsapType = (typeof import('gsap'))['default'];
+    type TimelineType = ReturnType<GsapType['timeline']>;
 
-    if (
-      !originNode ||
-      !modalRoot ||
-      !modalBackground ||
-      !modalContent ||
-      !modalCloseButton ||
-      !modalCover
-    ) {
-      return;
-    }
+    let timeline: TimelineType | undefined;
+    let isDisposed = false;
 
-    const targetRect = originNode.getBoundingClientRect();
-    gsap.killTweensOf([modalRoot, modalBackground, modalContent, modalCloseButton, modalCover]);
-
-    const timeline = gsap.timeline();
-
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      gsap.set(modalRoot, { display: 'block' });
-
-      gsap.set(modalContent, {
-        top: targetRect.top,
-        left: targetRect.left,
-        width: targetRect.width,
-        height: targetRect.height,
-        xPercent: 0,
-        yPercent: 0,
-        opacity: 1,
-        borderRadius: 0,
-      });
-      gsap.set(modalBackground, { opacity: 0 });
-      gsap.set(modalCloseButton, { opacity: 0 });
-      gsap.set(modalCover, { opacity: 1 });
-
-      timeline
-        .to(modalBackground, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0)
-        .to(
-          modalContent,
-          {
-            top: '50%',
-            left: '50%',
-            xPercent: -50,
-            yPercent: -50,
-            width: window.innerWidth > 768 ? '80vw' : '95vw',
-            height: window.innerWidth > 768 ? '80vh' : '50vh',
-            borderRadius: 16,
-            duration: 0.7,
-            ease: 'power3.inOut',
-          },
-          0,
-        )
-        .to(modalCloseButton, { opacity: 1, duration: 0.3 }, '-=0.1')
-        .to(modalCover, { opacity: 0, duration: 0.5 }, '-=0.25');
-    } else {
-      if (modalRoot.style.display === 'none') {
+    const runAnimation = async () => {
+      const { default: gsap } = await import('gsap');
+      if (isDisposed) {
         return;
       }
 
-      timeline
-        .to(modalCloseButton, { opacity: 0, duration: 0.2 }, 0)
-        .to(modalCover, { opacity: 1, duration: 0.3 }, 0)
-        .to(modalBackground, { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 0)
-        .to(
-          modalContent,
-          {
-            top: targetRect.top,
-            left: targetRect.left,
-            width: targetRect.width,
-            height: targetRect.height,
-            xPercent: 0,
-            yPercent: 0,
-            borderRadius: 0,
-            duration: 0.7,
-            ease: 'power3.inOut',
-            onComplete: () => {
-              gsap.set(modalRoot, { display: 'none' });
-              document.body.style.overflow = '';
+      const originNode = originRef.current;
+      const modalRoot = modalRootRef.current;
+      const modalBackground = modalBackgroundRef.current;
+      const modalContent = modalContentRef.current;
+      const modalCloseButton = modalCloseRef.current;
+      const modalCover = modalCoverRef.current;
+
+      if (
+        !originNode ||
+        !modalRoot ||
+        !modalBackground ||
+        !modalContent ||
+        !modalCloseButton ||
+        !modalCover
+      ) {
+        return;
+      }
+
+      const targetRect = originNode.getBoundingClientRect();
+      if (!isOpen && modalRoot.style.display === 'none') {
+        return;
+      }
+
+      gsap.killTweensOf([modalRoot, modalBackground, modalContent, modalCloseButton, modalCover]);
+      const activeTimeline = gsap.timeline();
+      timeline = activeTimeline;
+
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+        gsap.set(modalRoot, { display: 'block' });
+
+        gsap.set(modalContent, {
+          top: targetRect.top,
+          left: targetRect.left,
+          width: targetRect.width,
+          height: targetRect.height,
+          xPercent: 0,
+          yPercent: 0,
+          opacity: 1,
+          borderRadius: 0,
+        });
+        gsap.set(modalBackground, { opacity: 0 });
+        gsap.set(modalCloseButton, { opacity: 0 });
+        gsap.set(modalCover, { opacity: 1 });
+
+        activeTimeline
+          .to(modalBackground, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0)
+          .to(
+            modalContent,
+            {
+              top: '50%',
+              left: '50%',
+              xPercent: -50,
+              yPercent: -50,
+              width: window.innerWidth > 768 ? '80vw' : '95vw',
+              height: window.innerWidth > 768 ? '80vh' : '50vh',
+              borderRadius: 16,
+              duration: 0.7,
+              ease: 'power3.inOut',
             },
-          },
-          0,
-        );
-    }
+            0,
+          )
+          .to(modalCloseButton, { opacity: 1, duration: 0.3 }, '-=0.1')
+          .to(modalCover, { opacity: 0, duration: 0.5 }, '-=0.25');
+      } else {
+        activeTimeline
+          .to(modalCloseButton, { opacity: 0, duration: 0.2 }, 0)
+          .to(modalCover, { opacity: 1, duration: 0.3 }, 0)
+          .to(modalBackground, { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 0)
+          .to(
+            modalContent,
+            {
+              top: targetRect.top,
+              left: targetRect.left,
+              width: targetRect.width,
+              height: targetRect.height,
+              xPercent: 0,
+              yPercent: 0,
+              borderRadius: 0,
+              duration: 0.7,
+              ease: 'power3.inOut',
+              onComplete: () => {
+                gsap.set(modalRoot, { display: 'none' });
+                document.body.style.overflow = '';
+              },
+            },
+            0,
+          );
+      }
+    };
+
+    void runAnimation();
 
     return () => {
-      timeline.kill();
+      isDisposed = true;
+      timeline?.kill();
     };
   }, [isOpen, originRef]);
 
@@ -179,10 +211,10 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
           />
 
           <iframe
-            allow="autoplay; encrypted-media"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             className="absolute inset-0 z-0 h-full w-full"
-            src={isOpen ? VIDEO_IFRAME_AUTOPLAY : media.videoEmbed}
+            src={isOpen ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE}
             title="Video explicativo del tratamiento"
           />
         </div>
