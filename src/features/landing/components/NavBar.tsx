@@ -27,19 +27,6 @@ export const NavBar = () => (
         </div>
       </a>
 
-      <div className="flex items-center md:hidden">
-        <LuxuryButton
-          className="px-4 py-2 text-[10px] tracking-[0.12em]"
-          href="#agendar"
-          icon={
-            <WhatsAppIcon className="h-3.5 w-3.5 transition-colors duration-500 group-hover:text-white" />
-          }
-          variant="outline"
-        >
-          Agendar
-        </LuxuryButton>
-      </div>
-
       <div className="hidden items-center gap-10 md:flex">
         {navLinks.map((link) => (
           <a
