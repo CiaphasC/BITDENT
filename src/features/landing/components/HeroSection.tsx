@@ -11,6 +11,9 @@ export const HeroSection = () => {
   const threeCanvasRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const openVideoModal = () => {
+    setIsVideoOpen(true);
+  };
 
   useHeroKnotScene(threeCanvasRef);
 
@@ -73,13 +76,14 @@ export const HeroSection = () => {
             </div>
 
             <div className="animate-reveal hidden md:block">
-              <a
+              <button
                 className="flex items-center gap-2 border-b border-midnight-900 pb-1 text-xs font-display tracking-widest text-midnight-900 uppercase transition-all hover:border-verde-500 hover:text-verde-500"
-                href="#hero-section"
+                onClick={openVideoModal}
+                type="button"
               >
                 <PlayIcon className="h-4 w-4" />
                 Ver Explicación Médica
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -101,9 +105,7 @@ export const HeroSection = () => {
           <button
             className="scroll-reveal group absolute inset-0 z-20 flex cursor-pointer flex-col items-center justify-center"
             id="play-video-btn"
-            onClick={() => {
-              setIsVideoOpen(true);
-            }}
+            onClick={openVideoModal}
             type="button"
           >
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2a2d34] shadow-elevated transition-colors duration-300 group-hover:bg-[#2d6a4f] md:h-20 md:w-20">
