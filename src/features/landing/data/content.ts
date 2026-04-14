@@ -4,6 +4,7 @@ import type {
   SocialLink,
   Testimonial,
 } from '@/features/landing/types/content';
+import heroImage from '../../../../assets/heroimage.jpg';
 
 export const navLinks = [
   { href: '#testimonios', label: 'Testimonios' },
@@ -115,9 +116,8 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const media = {
-  heroDoctor:
-    'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80',
+  heroDoctor: heroImage,
   profileInstruments:
     'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80',
-  videoEmbed: 'https://fast.wistia.com/embed/medias/eyqogrxnfi',
+  videoEmbed: 'https://fast.wistia.net/embed/iframe/b6rjwbs90l',
 };
