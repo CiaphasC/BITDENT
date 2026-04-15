@@ -172,7 +172,7 @@ export const testimonialsSectionContent = {
   title: 'Testimonios de pacientes',
   previousAriaLabel: 'Testimonio anterior',
   nextAriaLabel: 'Siguiente testimonio',
-  caseLabel: 'Caso Real 3Bitdent',
+  caseLabel: 'Caso Real Bitdent',
   beforeImageAlt: 'Antes',
   afterImageAlt: 'Después',
   beforeLabel: 'Antes',
