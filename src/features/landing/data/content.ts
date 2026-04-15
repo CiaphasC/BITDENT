@@ -5,11 +5,54 @@ import type {
   Testimonial,
 } from '@/features/landing/types/content';
 import heroImage from '../../../../assets/heroimage.jpg';
+import profileImage from '../../../../assets/perfil_image.jpg';
+
+export const brandContent = {
+  name: 'BITDENT',
+  subtitle: 'Estética Dental Avanzada',
+  footerSubtitle: 'Odontología de Alta Especialidad',
+  logoSrc: '/brand/logo.png',
+  logoAlt: 'Logo BITDENT',
+};
+
+export const navbarContent = {
+  homeHref: '#hero-section',
+  ctaLabel: 'Agendar',
+  ctaHref: 'https://wa.link/h7xgxc',
+};
 
 export const navLinks = [
   { href: '#testimonios', label: 'Testimonios' },
   { href: '#beneficios', label: 'Beneficios' },
 ] as const;
+
+export const heroContent = {
+  eyebrow: 'Estética y Confianza',
+  title: {
+    line1: 'Los dientes dañados',
+    line2Prefix: 'no solo afectan ',
+    line2Highlight: 'tu sonrisa',
+    line2Suffix: ',',
+    line3: 'también tu calidad de vida.',
+  },
+  description: {
+    strongStart: 'Descubre',
+    textBeforeMiddle: ' por qué las coronas de zirconia son ',
+    strongMiddle: 'la solución definitiva',
+    textBeforeEnd: ' para recuperar tu estética y confianza, todo ',
+    strongEnd: 'SIN dolor y en tiempo récord',
+    textAfterEnd: '.',
+  },
+  ctaPrimaryLabel: 'Agendar cita de Valoración',
+  ctaPrimaryHref: '#agendar',
+  ctaVideoLabel: 'Ver Explicación Médica',
+  videoOverlay: {
+    playLabel: 'Reproducir video',
+    doctorName: 'Dr. Enrique',
+    duration: '3:12',
+    progressWidthPercent: 25,
+  },
+};
 
 export const benefits: Benefit[] = [
   {
@@ -33,6 +76,14 @@ export const benefits: Benefit[] = [
     delayMs: 200,
   },
 ];
+
+export const benefitsSectionContent = {
+  badgePrefix: 'Garantía',
+  badgeBrand: 'Bitdent',
+  title: 'En Bitdent ofrecemos este tratamiento para:',
+  ctaLabel: 'Agendar cita de Valoración',
+  ctaHref: '#agendar',
+};
 
 export const idealProfile: IdealProfileItem[] = [
   {
@@ -64,6 +115,12 @@ export const idealProfile: IdealProfileItem[] = [
       'Con nuestra tecnología avanzada en clínica, podemos completar tu tratamiento en menos de lo que imaginas.',
   },
 ];
+
+export const focusSectionContent = {
+  badge: 'Perfil del Paciente',
+  titleLine1: 'Este tratamiento es',
+  titleAccent: 'ideal para ti si:',
+};
 
 export const testimonials: Testimonial[] = [
   {
@@ -110,14 +167,56 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+export const testimonialsSectionContent = {
+  badge: 'Evidencia Visual',
+  title: 'Testimonios de pacientes',
+  previousAriaLabel: 'Testimonio anterior',
+  nextAriaLabel: 'Siguiente testimonio',
+  caseLabel: 'Caso Real 3Bitdent',
+  beforeImageAlt: 'Antes',
+  afterImageAlt: 'Después',
+  beforeLabel: 'Antes',
+  afterLabel: 'Después',
+};
+
 export const socialLinks: SocialLink[] = [
-  { id: 'instagram', href: '#', label: 'Instagram', network: 'instagram' },
-  { id: 'facebook', href: '#', label: 'Facebook', network: 'facebook' },
+  {
+    id: 'instagram',
+    href: 'https://www.instagram.com/bitdentmx',
+    label: 'Instagram',
+    network: 'instagram',
+  },
+  {
+    id: 'facebook',
+    href: 'https://www.facebook.com/share/1EKYxbqD74/?mibextid=wwXIfr',
+    label: 'Facebook',
+    network: 'facebook',
+  },
 ];
+
+export const ctaSectionContent = {
+  titleLine1: 'El comienzo de',
+  titleAccent: 'tu nueva sonrisa.',
+  description:
+    'Da el primer paso hacia una salud dental inquebrantable. Reserva tu valoración médica hoy mismo.',
+  buttonLabel: 'Agendar cita de Valoración',
+  buttonHref: 'https://wa.link/h7xgxc',
+};
+
+export const footerContent = {
+  legalDisclaimer:
+    'En BITDENT trabajamos con un enfoque clínico personalizado para lograr resultados estéticos y funcionales de alta calidad. Cada tratamiento se adapta a las necesidades de cada paciente, por lo que el diagnóstico, los tiempos y la evolución pueden variar según la valoración profesional realizada en consulta.',
+  copyright: '© 2026 3BITDENT. Todos los derechos reservados.',
+};
+
+export const mediaAltText = {
+  heroDoctor: 'Doctor dental',
+  profileInstruments: 'Instrumentos dentales',
+  videoTitle: 'Video explicativo del tratamiento',
+};
 
 export const media = {
   heroDoctor: heroImage,
-  profileInstruments:
-    'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80',
+  profileInstruments: profileImage,
   videoEmbed: 'https://fast.wistia.net/embed/iframe/b6rjwbs90l',
 };

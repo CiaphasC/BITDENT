@@ -1,6 +1,9 @@
 import clsx from 'clsx';
 
-import { testimonials } from '@/features/landing/data/content';
+import {
+  testimonials,
+  testimonialsSectionContent,
+} from '@/features/landing/data/content';
 import { useAutoSlider } from '@/features/landing/hooks/useAutoSlider';
 import { ChevronLeftIcon, ChevronRightIcon, QuoteIcon } from '@/shared/ui/icons';
 
@@ -23,16 +26,16 @@ export const TestimonialsSection = () => {
       <div className="relative z-10 mx-auto max-w-[90rem] px-4 md:px-16">
         <div className="scroll-reveal mb-16 text-center">
           <span className="mb-6 block text-[10px] font-display tracking-[0.3em] text-verde-500 uppercase">
-            Evidencia Visual
+            {testimonialsSectionContent.badge}
           </span>
           <h2 className="text-4xl font-serif font-light text-white md:text-5xl">
-            Testimonios de pacientes
+            {testimonialsSectionContent.title}
           </h2>
         </div>
 
         <div className="scroll-reveal relative mx-auto w-full max-w-5xl">
           <button
-            aria-label="Testimonio anterior"
+            aria-label={testimonialsSectionContent.previousAriaLabel}
             className="group absolute top-1/2 -left-4 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-midnight-800/80 text-white shadow-elevated backdrop-blur-sm transition-all duration-300 hover:border-verde-500 hover:bg-verde-500 focus:outline-none md:-left-8 md:h-14 md:w-14 lg:-left-12"
             id="slider-prev"
             onClick={previous}
@@ -42,7 +45,7 @@ export const TestimonialsSection = () => {
           </button>
 
           <button
-            aria-label="Siguiente testimonio"
+            aria-label={testimonialsSectionContent.nextAriaLabel}
             className="group absolute top-1/2 -right-4 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-midnight-800/80 text-white shadow-elevated backdrop-blur-sm transition-all duration-300 hover:border-verde-500 hover:bg-verde-500 focus:outline-none md:-right-8 md:h-14 md:w-14 lg:-right-12"
             id="slider-next"
             onClick={next}
@@ -62,7 +65,7 @@ export const TestimonialsSection = () => {
                   <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2">
                     <figure className="group relative aspect-square overflow-hidden">
                       <img
-                        alt="Antes"
+                        alt={testimonialsSectionContent.beforeImageAlt}
                         className={clsx(
                           'h-full w-full object-cover transition-transform duration-700 group-hover:scale-105',
                           testimonial.beforeClassName,
@@ -77,7 +80,7 @@ export const TestimonialsSection = () => {
 
                     <figure className="group relative aspect-square overflow-hidden">
                       <img
-                        alt="Después"
+                        alt={testimonialsSectionContent.afterImageAlt}
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                         decoding="async"
                         fetchPriority={index === currentIndex ? 'high' : 'low'}
@@ -103,18 +106,18 @@ export const TestimonialsSection = () => {
 
               <div className="relative grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="absolute top-4 left-4 z-10 border border-white/10 bg-midnight-900/80 px-3 py-1 text-[10px] tracking-widest text-verde-400 uppercase shadow-lg backdrop-blur">
-                  Caso Real 3Bitdent
+                  {testimonialsSectionContent.caseLabel}
                 </div>
 
                 <div className="relative aspect-square w-full">
                   <div className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-[10px] tracking-widest text-white uppercase shadow-lg backdrop-blur">
-                    Antes
+                    {testimonialsSectionContent.beforeLabel}
                   </div>
                 </div>
 
                 <div className="relative aspect-square w-full">
                   <div className="absolute right-4 bottom-4 bg-verde-500 px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase shadow-lg backdrop-blur">
-                    Después
+                    {testimonialsSectionContent.afterLabel}
                   </div>
                 </div>
               </div>

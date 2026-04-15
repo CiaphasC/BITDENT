@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { media } from '@/features/landing/data/content';
+import { heroContent, media, mediaAltText } from '@/features/landing/data/content';
 import { useHeroKnotScene } from '@/features/landing/hooks/useHeroKnotScene';
 import { LuxuryButton } from '@/shared/ui/LuxuryButton';
 import { PlayIcon, WhatsAppIcon } from '@/shared/ui/icons';
@@ -30,34 +30,40 @@ export const HeroSection = () => {
         <div className="relative z-10 flex w-full flex-col justify-center bg-pearl/60 px-8 py-20 backdrop-blur-sm md:px-16 lg:w-[55%] lg:bg-transparent lg:px-24 lg:backdrop-blur-none">
           <div className="mb-6 overflow-hidden">
             <p className="animate-reveal text-[10px] font-display font-medium tracking-[0.4em] text-verde-600 uppercase md:text-xs">
-              Estética y Confianza
+              {heroContent.eyebrow}
             </p>
           </div>
 
           <h1 className="mb-8 text-4xl leading-[1.2] font-serif font-light text-midnight-900 md:text-5xl lg:text-6xl">
             <span className="block overflow-hidden">
-              <span className="animate-reveal block">Los dientes dañados</span>
+              <span className="animate-reveal block">{heroContent.title.line1}</span>
             </span>
             <span className="block overflow-hidden">
               <span className="animate-reveal block">
-                no solo afectan <span className="italic text-verde-500">tu sonrisa</span>,
+                {heroContent.title.line2Prefix}
+                <span className="italic text-verde-500">{heroContent.title.line2Highlight}</span>
+                {heroContent.title.line2Suffix}
               </span>
             </span>
             <span className="block overflow-hidden">
-              <span className="animate-reveal block">también tu calidad de vida.</span>
+              <span className="animate-reveal block">{heroContent.title.line3}</span>
             </span>
           </h1>
 
           <div className="mb-12 overflow-hidden">
             <p className="animate-reveal max-w-lg text-base leading-relaxed font-light text-stone-500 md:text-lg">
-              <strong className="font-semibold text-midnight-900">Descubre</strong> por qué las
-              coronas de zirconia son{' '}
-              <strong className="font-semibold text-midnight-900">la solución definitiva</strong>{' '}
-              para recuperar tu estética y confianza, todo{' '}
               <strong className="font-semibold text-midnight-900">
-                SIN dolor y en tiempo récord
+                {heroContent.description.strongStart}
               </strong>
-              .
+              {heroContent.description.textBeforeMiddle}
+              <strong className="font-semibold text-midnight-900">
+                {heroContent.description.strongMiddle}
+              </strong>
+              {heroContent.description.textBeforeEnd}
+              <strong className="font-semibold text-midnight-900">
+                {heroContent.description.strongEnd}
+              </strong>
+              {heroContent.description.textAfterEnd}
             </p>
           </div>
 
@@ -65,13 +71,13 @@ export const HeroSection = () => {
             <div className="animate-reveal">
               <LuxuryButton
                 className="px-8 py-4"
-                href="#agendar"
+                href={heroContent.ctaPrimaryHref}
                 icon={
                   <WhatsAppIcon className="h-5 w-5 text-verde-500 transition-colors duration-500 group-hover:text-white" />
                 }
                 variant="solid"
               >
-                Agendar cita de Valoración
+                {heroContent.ctaPrimaryLabel}
               </LuxuryButton>
             </div>
 
@@ -82,7 +88,7 @@ export const HeroSection = () => {
                 type="button"
               >
                 <PlayIcon className="h-4 w-4" />
-                Ver Explicación Médica
+                {heroContent.ctaVideoLabel}
               </button>
             </div>
           </div>
@@ -94,7 +100,7 @@ export const HeroSection = () => {
           ref={videoSectionRef}
         >
           <img
-            alt="Doctor dental"
+            alt={mediaAltText.heroDoctor}
             className="absolute top-[-20%] left-0 h-[140%] w-full object-cover object-center brightness-[0.55] contrast-[1.15] saturate-[0.4]"
             id="video-parallax"
             src={media.heroDoctor}
@@ -112,18 +118,22 @@ export const HeroSection = () => {
               <PlayIcon className="ml-1 h-6 w-6 text-white" />
             </span>
             <span className="mt-6 translate-y-2 text-[10px] font-display font-medium tracking-[0.2em] text-white uppercase opacity-0 drop-shadow-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:text-xs">
-              Reproducir video
+              {heroContent.videoOverlay.playLabel}
             </span>
           </button>
 
           <div className="pointer-events-none absolute right-8 bottom-8 left-8 z-20 flex flex-col gap-4">
             <div className="h-1 w-full overflow-hidden rounded-full bg-white/30">
-              <div className="h-full w-1/4 bg-[#2d6a4f]" />
+              <div
+                className="h-full bg-[#2d6a4f]"
+                style={{ width: `${heroContent.videoOverlay.progressWidthPercent}%` }}
+              />
             </div>
             <div className="flex items-center justify-between text-xs font-display font-medium tracking-widest text-white uppercase drop-shadow-md">
-              <span>Dr. Enrique</span>
+              <span>{heroContent.videoOverlay.doctorName}</span>
               <span className="flex items-center gap-2">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-red-500" /> 3:12
+                <span className="h-2 w-2 animate-pulse rounded-full bg-red-500" />{' '}
+                {heroContent.videoOverlay.duration}
               </span>
             </div>
           </div>

@@ -1,7 +1,11 @@
 import clsx from 'clsx';
 import type { ReactElement } from 'react';
 
-import { benefits } from '@/features/landing/data/content';
+import {
+  benefits,
+  benefitsSectionContent,
+  brandContent,
+} from '@/features/landing/data/content';
 import type { BenefitIcon } from '@/features/landing/types/content';
 import { LuxuryButton } from '@/shared/ui/LuxuryButton';
 import { SectionHeading } from '@/shared/ui/SectionHeading';
@@ -25,20 +29,20 @@ export const BenefitsSection = () => (
         align="center"
         badge={
           <span className="inline-flex items-center gap-2">
-            <span>Garantía</span>
+            <span>{benefitsSectionContent.badgePrefix}</span>
             <img
-              alt="BITDENT"
+              alt={brandContent.name}
               className="h-3.5 w-auto"
               decoding="async"
               height={14}
-              src="/brand/logo.png"
+              src={brandContent.logoSrc}
               width={52}
             />
-            <span>Bitdent</span>
+            <span>{benefitsSectionContent.badgeBrand}</span>
           </span>
         }
         className="mb-20"
-        title="En Bitdent ofrecemos este tratamiento para:"
+        title={benefitsSectionContent.title}
       />
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -66,13 +70,13 @@ export const BenefitsSection = () => (
       <div className="scroll-reveal mt-16 flex justify-center">
         <LuxuryButton
           className={clsx('px-10 py-4')}
-          href="#agendar"
+          href={benefitsSectionContent.ctaHref}
           icon={
             <WhatsAppIcon className="h-5 w-5 text-verde-500 transition-colors duration-500 group-hover:text-white" />
           }
           variant="solid"
         >
-          Agendar cita de Valoración
+          {benefitsSectionContent.ctaLabel}
         </LuxuryButton>
       </div>
     </div>

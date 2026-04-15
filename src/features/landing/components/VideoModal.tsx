@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, type RefObject } from 'react';
 
-import { media } from '@/features/landing/data/content';
+import { media, mediaAltText } from '@/features/landing/data/content';
 import { CloseIcon } from '@/shared/ui/icons';
 
 interface VideoModalProps {
@@ -203,7 +203,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
 
         <div className="relative h-full w-full" id="video-iframe-container">
           <img
-            alt="Doctor dental"
+            alt={mediaAltText.heroDoctor}
             className="absolute inset-0 z-10 h-full w-full object-cover brightness-[0.55] contrast-[1.15] saturate-[0.4] transition-opacity duration-700"
             id="video-modal-cover"
             ref={modalCoverRef}
@@ -215,7 +215,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
             allowFullScreen
             className="absolute inset-0 z-0 h-full w-full"
             src={isOpen ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE}
-            title="Video explicativo del tratamiento"
+            title={mediaAltText.videoTitle}
           />
         </div>
       </div>

@@ -1,6 +1,11 @@
 import { useRef } from 'react';
 
-import { idealProfile, media } from '@/features/landing/data/content';
+import {
+  focusSectionContent,
+  idealProfile,
+  media,
+  mediaAltText,
+} from '@/features/landing/data/content';
 import { useFogScene } from '@/features/landing/hooks/useFogScene';
 
 export const FocusSection = () => {
@@ -20,12 +25,12 @@ export const FocusSection = () => {
         <div className="flex flex-col items-start gap-12 lg:flex-row lg:gap-24">
           <div className="scroll-reveal w-full lg:w-1/2">
             <span className="mb-6 block text-[10px] font-display tracking-[0.3em] text-verde-600 uppercase">
-              Perfil del Paciente
+              {focusSectionContent.badge}
             </span>
             <h2 className="mb-8 text-4xl font-serif font-light text-midnight-900 md:text-5xl">
-              Este tratamiento es
+              {focusSectionContent.titleLine1}
               <br />
-              <span className="italic text-stone-400">ideal para ti si:</span>
+              <span className="italic text-stone-400">{focusSectionContent.titleAccent}</span>
             </h2>
 
             <div className="stagger-list border-t border-stone-200">
@@ -50,7 +55,7 @@ export const FocusSection = () => {
 
           <div className="editorial-img-wrapper scroll-reveal relative mt-6 w-full overflow-hidden rounded-2xl border border-stone-200/60 bg-white shadow-subtle lg:mt-0 lg:h-[600px] lg:w-1/2 lg:rounded-none lg:border-0 lg:bg-transparent lg:shadow-none">
             <img
-              alt="Instrumentos dentales"
+              alt={mediaAltText.profileInstruments}
               className="h-[360px] w-full object-cover object-[center_28%] shadow-elevated sm:h-[440px] lg:h-full lg:object-center"
               src={media.profileInstruments}
             />
