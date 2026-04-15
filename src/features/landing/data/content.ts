@@ -206,7 +206,7 @@ export const ctaSectionContent = {
 export const footerContent = {
   legalDisclaimer:
     'En BITDENT trabajamos con un enfoque clínico personalizado para lograr resultados estéticos y funcionales de alta calidad. Cada tratamiento se adapta a las necesidades de cada paciente, por lo que el diagnóstico, los tiempos y la evolución pueden variar según la valoración profesional realizada en consulta.',
-  copyright: '© 2026 3BITDENT. Todos los derechos reservados.',
+  copyright: '© 2026 BITDENT. Todos los derechos reservados.',
 };
 
 export const mediaAltText = {
