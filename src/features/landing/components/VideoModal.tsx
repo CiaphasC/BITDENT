@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, type RefObject } from 'react';
 
 import { media, mediaAltText } from '@/features/landing/data/content';
 import { CloseIcon } from '@/shared/ui/icons';
@@ -9,7 +9,7 @@ interface VideoModalProps {
   onClose: () => void;
 }
 
-const buildVideoSource = (source: string, shouldAutoplay: boolean, shouldMute: boolean) => {
+const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
   try {
     const url = new URL(source);
 
@@ -20,9 +20,9 @@ const buildVideoSource = (source: string, shouldAutoplay: boolean, shouldMute: b
     }
 
     url.searchParams.set('playsinline', '1');
-    url.searchParams.set('muted', shouldMute ? '1' : '0');
-    url.searchParams.set('mute', shouldMute ? '1' : '0');
-    url.searchParams.set('volume', shouldMute ? '0' : '1');
+    url.searchParams.set('muted', '0');
+    url.searchParams.set('mute', '0');
+    url.searchParams.set('volume', '1');
 
     return url.toString();
   } catch {
@@ -30,7 +30,8 @@ const buildVideoSource = (source: string, shouldAutoplay: boolean, shouldMute: b
   }
 };
 
-const VIDEO_IFRAME_BASE = buildVideoSource(media.videoEmbed, false, false);
+const VIDEO_IFRAME_BASE = buildVideoSource(media.videoEmbed, false);
+const VIDEO_IFRAME_AUTOPLAY = buildVideoSource(media.videoEmbed, true);
 
 export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalRootRef = useRef<HTMLDivElement | null>(null);
@@ -38,13 +39,6 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalContentRef = useRef<HTMLDivElement | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement | null>(null);
   const modalCoverRef = useRef<HTMLImageElement | null>(null);
-  const [isMuted, setIsMuted] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsMuted(false);
-    }
-  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -183,9 +177,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
     [],
   );
 
-  const activeVideoSource = isOpen
-    ? buildVideoSource(media.videoEmbed, true, isMuted)
-    : VIDEO_IFRAME_BASE;
+  const activeVideoSource = isOpen ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE;
 
   return (
     <div
@@ -207,17 +199,6 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
         ref={modalContentRef}
       >
         <button
-          aria-label={isMuted ? 'Activar sonido' : 'Desactivar sonido'}
-          className="absolute top-4 right-16 z-50 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-xs font-display tracking-widest text-white uppercase transition-colors duration-300 hover:bg-black/70 focus:outline-none md:top-6 md:right-20"
-          onClick={() => {
-            setIsMuted((previous) => !previous);
-          }}
-          type="button"
-        >
-          {isMuted ? 'Sonido Off' : 'Sonido On'}
-        </button>
-
-        <button
           className="absolute top-4 right-4 z-50 p-2 text-white/70 transition-colors duration-300 hover:text-white focus:outline-none md:top-6 md:right-6"
           id="video-modal-close"
           onClick={onClose}
@@ -230,7 +211,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
         <div className="relative h-full w-full" id="video-iframe-container">
           <img
             alt={mediaAltText.heroDoctor}
-            className="absolute inset-0 z-10 h-full w-full object-cover brightness-[0.55] contrast-[1.15] saturate-[0.4] transition-opacity duration-700"
+            className="pointer-events-none absolute inset-0 z-10 h-full w-full object-cover brightness-[0.55] contrast-[1.15] saturate-[0.4] transition-opacity duration-700"
             id="video-modal-cover"
             ref={modalCoverRef}
             src={media.heroDoctor}
