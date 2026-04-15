@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
 
 import { media, mediaAltText } from '@/features/landing/data/content';
 import { CloseIcon } from '@/shared/ui/icons';
@@ -25,8 +25,31 @@ const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
   }
 };
 
-const VIDEO_IFRAME_BASE = buildVideoSource(media.videoEmbed, false);
-const VIDEO_IFRAME_AUTOPLAY = buildVideoSource(media.videoEmbed, true);
+const enrichVideoSource = (source: string) => {
+  try {
+    const url = new URL(source);
+    url.searchParams.set('playsinline', '1');
+    return url.toString();
+  } catch {
+    return source;
+  }
+};
+
+const detectIOSDevice = () => {
+  if (typeof navigator === 'undefined') {
+    return false;
+  }
+
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua);
+  const isIPadOSDesktopMode =
+    navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+
+  return isIOS || isIPadOSDesktopMode;
+};
+
+const VIDEO_IFRAME_BASE = enrichVideoSource(buildVideoSource(media.videoEmbed, false));
+const VIDEO_IFRAME_AUTOPLAY = enrichVideoSource(buildVideoSource(media.videoEmbed, true));
 
 export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalRootRef = useRef<HTMLDivElement | null>(null);
@@ -34,6 +57,11 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalContentRef = useRef<HTMLDivElement | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement | null>(null);
   const modalCoverRef = useRef<HTMLImageElement | null>(null);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
+
+  useEffect(() => {
+    setIsIOSDevice(detectIOSDevice());
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -214,7 +242,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             className="absolute inset-0 z-0 h-full w-full"
-            src={isOpen ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE}
+            src={isOpen && !isIOSDevice ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE}
             title={mediaAltText.videoTitle}
           />
         </div>
