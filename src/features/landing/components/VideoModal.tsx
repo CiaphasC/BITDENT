@@ -9,7 +9,7 @@ interface VideoModalProps {
   onClose: () => void;
 }
 
-const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
+const buildVideoSource = (source: string, shouldAutoplay: boolean, shouldMute: boolean) => {
   try {
     const url = new URL(source);
 
@@ -19,37 +19,18 @@ const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
       url.searchParams.set('autoplay', shouldAutoplay ? '1' : '0');
     }
 
-    return url.toString();
-  } catch {
-    return source;
-  }
-};
-
-const enrichVideoSource = (source: string) => {
-  try {
-    const url = new URL(source);
     url.searchParams.set('playsinline', '1');
+    url.searchParams.set('muted', shouldMute ? '1' : '0');
+    url.searchParams.set('mute', shouldMute ? '1' : '0');
+    url.searchParams.set('volume', shouldMute ? '0' : '1');
+
     return url.toString();
   } catch {
     return source;
   }
 };
 
-const detectIOSDevice = () => {
-  if (typeof navigator === 'undefined') {
-    return false;
-  }
-
-  const ua = navigator.userAgent;
-  const isIOS = /iPad|iPhone|iPod/.test(ua);
-  const isIPadOSDesktopMode =
-    navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-
-  return isIOS || isIPadOSDesktopMode;
-};
-
-const VIDEO_IFRAME_BASE = enrichVideoSource(buildVideoSource(media.videoEmbed, false));
-const VIDEO_IFRAME_AUTOPLAY = enrichVideoSource(buildVideoSource(media.videoEmbed, true));
+const VIDEO_IFRAME_BASE = buildVideoSource(media.videoEmbed, false, false);
 
 export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalRootRef = useRef<HTMLDivElement | null>(null);
@@ -57,11 +38,13 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalContentRef = useRef<HTMLDivElement | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement | null>(null);
   const modalCoverRef = useRef<HTMLImageElement | null>(null);
-  const [isIOSDevice, setIsIOSDevice] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    setIsIOSDevice(detectIOSDevice());
-  }, []);
+    if (isOpen) {
+      setIsMuted(false);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -200,6 +183,10 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
     [],
   );
 
+  const activeVideoSource = isOpen
+    ? buildVideoSource(media.videoEmbed, true, isMuted)
+    : VIDEO_IFRAME_BASE;
+
   return (
     <div
       className="fixed inset-0 z-[100]"
@@ -219,6 +206,17 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
         id="video-modal-content"
         ref={modalContentRef}
       >
+        <button
+          aria-label={isMuted ? 'Activar sonido' : 'Desactivar sonido'}
+          className="absolute top-4 right-16 z-50 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-xs font-display tracking-widest text-white uppercase transition-colors duration-300 hover:bg-black/70 focus:outline-none md:top-6 md:right-20"
+          onClick={() => {
+            setIsMuted((previous) => !previous);
+          }}
+          type="button"
+        >
+          {isMuted ? 'Sonido Off' : 'Sonido On'}
+        </button>
+
         <button
           className="absolute top-4 right-4 z-50 p-2 text-white/70 transition-colors duration-300 hover:text-white focus:outline-none md:top-6 md:right-6"
           id="video-modal-close"
@@ -242,7 +240,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             className="absolute inset-0 z-0 h-full w-full"
-            src={isOpen && !isIOSDevice ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE}
+            src={activeVideoSource}
             title={mediaAltText.videoTitle}
           />
         </div>
