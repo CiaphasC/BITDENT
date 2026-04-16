@@ -50,11 +50,15 @@ export const NavBar = () => {
           <div className="flex flex-col">
             <img
               alt={brandContent.logoAlt}
-              className="-ml-[2.7rem] translate-y-[0.24rem] h-9 w-auto object-contain sm:-ml-[2.6rem] sm:translate-y-[0.26rem] sm:h-11 md:-ml-[2.6rem] md:translate-y-[0.28rem] md:h-[3.25rem]"
+              className="bitdent-wordmark -ml-[2.7rem] translate-y-[0.24rem] h-9 w-auto object-contain sm:-ml-[2.6rem] sm:translate-y-[0.26rem] sm:h-11 md:-ml-[2.6rem] md:translate-y-[0.28rem] md:h-[3.25rem]"
               decoding="async"
+              fetchPriority="high"
+              height={458}
+              loading="eager"
               src={brandContent.logoWordmarkSrc}
+              width={1344}
             />
-            <span className="mt-1 pl-8 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:pl-10 sm:text-[9px] sm:tracking-[0.25em] md:pl-[3.15rem]">
+            <span className="bitdent-wordmark-subtitle mt-1 pl-8 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:pl-10 sm:text-[9px] sm:tracking-[0.25em] md:pl-[3.15rem]">
               {brandContent.subtitle}
             </span>
           </div>
