@@ -5,6 +5,7 @@ import type {
   Testimonial,
 } from '@/features/landing/types/content';
 import heroImage from '../../../../assets/heroimage.jpg';
+import logoTextImage from '../../../../assets/logo-text.png';
 import profileImage from '../../../../assets/perfil_image.jpg';
 
 export const brandContent = {
@@ -12,6 +13,7 @@ export const brandContent = {
   subtitle: 'Estética Dental Avanzada',
   footerSubtitle: 'Odontología de Alta Especialidad',
   logoSrc: '/brand/logo.png',
+  logoWordmarkSrc: logoTextImage,
   logoAlt: 'Logo BITDENT',
 };
 

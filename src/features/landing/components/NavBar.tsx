@@ -47,22 +47,17 @@ export const NavBar = () => {
             handleInternalNavigation(event, navbarContent.homeHref);
           }}
         >
-        <img
-          alt={brandContent.logoAlt}
-          className="mr-2 h-8 w-auto object-contain sm:mr-3 sm:h-10 md:h-11"
-          decoding="async"
-          height={44}
-          src={brandContent.logoSrc}
-          width={172}
-        />
-        <div className="flex flex-col">
-          <span className="text-2xl font-serif font-normal tracking-wide text-midnight-900 uppercase sm:text-3xl">
-            {brandContent.name}
-          </span>
-          <span className="mt-1 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:text-[9px] sm:tracking-[0.25em]">
-            {brandContent.subtitle}
-          </span>
-        </div>
+          <div className="flex flex-col">
+            <img
+              alt={brandContent.logoAlt}
+              className="h-8 w-auto object-contain sm:h-10 md:h-11"
+              decoding="async"
+              src={brandContent.logoWordmarkSrc}
+            />
+            <span className="mt-1 pl-9 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:pl-11 sm:text-[9px] sm:tracking-[0.25em] md:pl-12">
+              {brandContent.subtitle}
+            </span>
+          </div>
         </a>
 
         <div className="hidden items-center gap-10 md:flex">
