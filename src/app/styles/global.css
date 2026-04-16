@@ -71,7 +71,7 @@ body {
 
 .bitdent-wordmark-subtitle {
   display: block;
-  margin-top: 0.25rem;
+  margin-top: -0.18rem;
   padding-left: 2rem;
   color: #a8a29e;
   font-family: "Montserrat", sans-serif;
@@ -91,6 +91,7 @@ body {
   }
 
   .bitdent-wordmark-subtitle {
+    margin-top: -0.22rem;
     padding-left: 2.5rem;
     font-size: 9px;
     letter-spacing: 0.25em;
@@ -105,6 +106,7 @@ body {
   }
 
   .bitdent-wordmark-subtitle {
+    margin-top: -0.28rem;
     padding-left: 3.15rem;
   }
 }
