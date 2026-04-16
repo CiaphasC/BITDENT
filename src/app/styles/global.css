@@ -60,19 +60,30 @@ body {
 .bitdent-wordmark {
   display: block;
   flex: none;
+  position: relative;
+  overflow: visible;
   width: 6.625rem;
   height: 2.25rem;
-  margin-left: -2.64rem;
+  margin-left: -2.7rem;
   transform: translateY(0.24rem);
+}
+
+.bitdent-wordmark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--bitdent-wordmark-url, url('/brand/logo-text.png'));
   background-position: left center;
   background-repeat: no-repeat;
   background-size: contain;
+  transform: translateX(2.63rem);
+  transform-origin: left center;
 }
 
 .bitdent-wordmark-subtitle {
   display: block;
   margin-top: -0.18rem;
-  padding-left: 0.35rem;
+  padding-left: 2rem;
   color: #a8a29e;
   font-family: "Montserrat", sans-serif;
   font-size: 8px;
@@ -86,13 +97,17 @@ body {
   .bitdent-wordmark {
     width: 8.0625rem;
     height: 2.75rem;
-    margin-left: -2.54rem;
+    margin-left: -2.6rem;
     transform: translateY(0.26rem);
+  }
+
+  .bitdent-wordmark::before {
+    transform: translateX(2.58rem);
   }
 
   .bitdent-wordmark-subtitle {
     margin-top: -0.22rem;
-    padding-left: 0.35rem;
+    padding-left: 2.5rem;
     font-size: 9px;
     letter-spacing: 0.25em;
   }
@@ -102,13 +117,17 @@ body {
   .bitdent-wordmark {
     width: 9.5625rem;
     height: 3.25rem;
-    margin-left: -2.54rem;
+    margin-left: -2.6rem;
     transform: translateY(0.28rem);
+  }
+
+  .bitdent-wordmark::before {
+    transform: translateX(2.76rem);
   }
 
   .bitdent-wordmark-subtitle {
     margin-top: -0.28rem;
-    padding-left: 0.4rem;
+    padding-left: 3.15rem;
   }
 }
 

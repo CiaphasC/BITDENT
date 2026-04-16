@@ -1,4 +1,4 @@
-import type { MouseEvent } from 'react';
+import type { CSSProperties, MouseEvent } from 'react';
 
 import {
   brandContent,
@@ -52,7 +52,11 @@ export const NavBar = () => {
             <span
               aria-hidden="true"
               className="bitdent-wordmark"
-              style={{ backgroundImage: `url(${brandContent.logoWordmarkSrc})` }}
+              style={
+                {
+                  '--bitdent-wordmark-url': `url(${brandContent.logoWordmarkSrc})`,
+                } as CSSProperties
+              }
             />
             <span className="bitdent-wordmark-subtitle">
               {brandContent.subtitle}
