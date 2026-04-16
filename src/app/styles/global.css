@@ -47,6 +47,68 @@ body {
   min-height: 100vh;
 }
 
+.bitdent-brand-link {
+  display: flex;
+  align-items: center;
+}
+
+.bitdent-brand-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.bitdent-wordmark {
+  display: block;
+  flex: none;
+  width: 6.625rem;
+  height: 2.25rem;
+  margin-left: -2.7rem;
+  transform: translateY(0.24rem);
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bitdent-wordmark-subtitle {
+  display: block;
+  margin-top: 0.25rem;
+  padding-left: 2rem;
+  color: #a8a29e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .bitdent-wordmark {
+    width: 8.0625rem;
+    height: 2.75rem;
+    margin-left: -2.6rem;
+    transform: translateY(0.26rem);
+  }
+
+  .bitdent-wordmark-subtitle {
+    padding-left: 2.5rem;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+  }
+}
+
+@media (min-width: 768px) {
+  .bitdent-wordmark {
+    width: 9.5625rem;
+    height: 3.25rem;
+    transform: translateY(0.28rem);
+  }
+
+  .bitdent-wordmark-subtitle {
+    padding-left: 3.15rem;
+  }
+}
+
 .glass-header {
   border-bottom: 1px solid rgba(13, 17, 23, 0.05);
   background: rgba(252, 251, 249, 0.7);

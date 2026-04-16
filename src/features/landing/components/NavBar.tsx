@@ -41,24 +41,20 @@ export const NavBar = () => {
     >
       <div className="mx-auto flex max-w-[90rem] items-center justify-between px-4 sm:px-6 md:px-16">
         <a
-          className="group flex items-center"
+          aria-label={brandContent.logoAlt}
+          className="bitdent-brand-link group"
           href={navbarContent.homeHref}
           onClick={(event) => {
             handleInternalNavigation(event, navbarContent.homeHref);
           }}
         >
-          <div className="flex flex-col">
-            <img
-              alt={brandContent.logoAlt}
-              className="bitdent-wordmark -ml-[2.7rem] translate-y-[0.24rem] h-9 w-auto object-contain sm:-ml-[2.6rem] sm:translate-y-[0.26rem] sm:h-11 md:-ml-[2.6rem] md:translate-y-[0.28rem] md:h-[3.25rem]"
-              decoding="async"
-              fetchPriority="high"
-              height={458}
-              loading="eager"
-              src={brandContent.logoWordmarkSrc}
-              width={1344}
+          <div className="bitdent-brand-stack">
+            <span
+              aria-hidden="true"
+              className="bitdent-wordmark"
+              style={{ backgroundImage: `url(${brandContent.logoWordmarkSrc})` }}
             />
-            <span className="bitdent-wordmark-subtitle mt-1 pl-8 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:pl-10 sm:text-[9px] sm:tracking-[0.25em] md:pl-[3.15rem]">
+            <span className="bitdent-wordmark-subtitle">
               {brandContent.subtitle}
             </span>
           </div>
