@@ -36,7 +36,7 @@ export const NavBar = () => {
 
   return (
     <nav
-      className="glass-header fixed top-0 start-0 z-50 w-full py-3 transition-all duration-500 md:py-5"
+      className="glass-header fixed top-0 start-0 z-50 w-full py-2 transition-all duration-500 md:py-3"
       id="navbar"
     >
       <div className="mx-auto flex max-w-[90rem] items-center justify-between px-4 sm:px-6 md:px-16">
