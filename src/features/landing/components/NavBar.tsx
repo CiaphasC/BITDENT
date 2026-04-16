@@ -50,11 +50,11 @@ export const NavBar = () => {
           <div className="flex flex-col">
             <img
               alt={brandContent.logoAlt}
-              className="h-8 w-auto object-contain sm:h-10 md:h-11"
+              className="h-9 w-auto object-contain sm:h-11 md:h-[3.25rem]"
               decoding="async"
               src={brandContent.logoWordmarkSrc}
             />
-            <span className="mt-1 pl-9 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:pl-11 sm:text-[9px] sm:tracking-[0.25em] md:pl-12">
+            <span className="mt-1 pl-8 text-[8px] font-display tracking-[0.2em] text-stone-400 uppercase sm:pl-10 sm:text-[9px] sm:tracking-[0.25em] md:pl-[3.15rem]">
               {brandContent.subtitle}
             </span>
           </div>
