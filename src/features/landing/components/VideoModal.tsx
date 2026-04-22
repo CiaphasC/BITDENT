@@ -24,6 +24,13 @@ const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
     url.searchParams.set('mute', '0');
     url.searchParams.set('volume', '1');
 
+    // iOS respeta los captions del sistema por accesibilidad. Forzamos a que estén OFF
+    // por defecto en Wistia para que no aparezcan en iPhone aunque el usuario los tenga
+    // activos globalmente. El espectador siempre puede activarlos manualmente.
+    url.searchParams.set('plugin[captions-v1][onByDefault]', 'false');
+    url.searchParams.set('plugin[captions-v1][subtitlesOnByDefault]', 'false');
+    url.searchParams.set('captions', 'false');
+
     return url.toString();
   } catch {
     return source;
