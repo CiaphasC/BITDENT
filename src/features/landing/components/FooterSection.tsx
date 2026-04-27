@@ -1,22 +1,31 @@
+import footerLogo from '../../../../assets/logo.png';
 import {
   brandContent,
   footerContent,
   socialLinks,
 } from '@/features/landing/data/content';
-import { FacebookIcon, InfoCircleIcon, InstagramIcon } from '@/shared/ui/icons';
+import { FacebookIcon, InstagramIcon } from '@/shared/ui/icons';
 
 export const FooterSection = () => (
   <footer className="bg-midnight-900 py-16">
     <div className="mx-auto max-w-[90rem] px-8 md:px-16">
       <div className="mb-16 flex flex-col items-start justify-between gap-10 md:flex-row md:items-center">
-        <div>
-          <h3 className="mb-2 flex items-center gap-2 text-2xl font-display font-semibold tracking-[0.15em] text-white">
-            <InfoCircleIcon className="h-6 w-6 text-verde-500" />
-            {brandContent.name}
-          </h3>
-          <p className="pl-8 text-[10px] font-display tracking-[0.3em] text-stone-400 uppercase">
-            {brandContent.footerSubtitle}
-          </p>
+        <div className="flex items-start gap-3">
+          <img
+            alt=""
+            aria-hidden="true"
+            className="mt-1 h-10 w-10 object-contain"
+            decoding="async"
+            src={footerLogo}
+          />
+          <div>
+            <h3 className="mb-2 text-2xl font-display font-semibold tracking-[0.15em] text-white">
+              {brandContent.name}
+            </h3>
+            <p className="text-[10px] font-display tracking-[0.3em] text-stone-400 uppercase">
+              {brandContent.footerSubtitle}
+            </p>
+          </div>
         </div>
 
         <div className="flex gap-8">

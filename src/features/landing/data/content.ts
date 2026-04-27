@@ -9,7 +9,7 @@ import profileImage from '../../../../assets/perfil_image.jpg';
 
 export const brandContent = {
   name: 'BITDENT',
-  subtitle: 'Estética Dental Avanzada',
+  subtitle: 'Odontología de Alta Especialidad',
   footerSubtitle: 'Odontología de Alta Especialidad',
   logoSrc: '/brand/logo.png',
   logoWordmarkSrc: '/brand/logo-text.png',
