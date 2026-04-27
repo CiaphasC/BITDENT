@@ -4,15 +4,21 @@ import type {
   SocialLink,
   Testimonial,
 } from '@/features/landing/types/content';
-import heroImage from '../../../../assets/heroimage.jpg';
-import profileImage from '../../../../assets/perfil_image.jpg';
+
+// Guia de edicion:
+// - Modifica textos, enlaces e imagenes de la landing desde este archivo.
+// - Todas las imagenes deben vivir en /public/images para mantener una estructura clara.
+// - Usa siempre rutas absolutas que empiecen con "/" para evitar imports dispersos.
+const BRAND_IMAGE_PATH = '/images/brand';
+const LANDING_IMAGE_PATH = '/images/landing';
+const TESTIMONIALS_IMAGE_PATH = '/images/testimonials';
 
 export const brandContent = {
   name: 'BITDENT',
   subtitle: 'Odontología de Alta Especialidad',
   footerSubtitle: 'Odontología de Alta Especialidad',
-  logoSrc: '/brand/logo.png',
-  logoWordmarkSrc: '/brand/logo-text.png',
+  logoSrc: `${BRAND_IMAGE_PATH}/logo-symbol.png`,
+  logoWordmarkSrc: `${BRAND_IMAGE_PATH}/logo-wordmark.png`,
   logoAlt: 'Logo BITDENT',
 };
 
@@ -128,43 +134,43 @@ export const testimonials: Testimonial[] = [
     id: 'testimonial-01',
     quote:
       '"Recuperé la confianza para sonreír. El proceso fue sin dolor, rápido y el acabado de la zirconia es indistinguible."',
-    beforeImage: '/arreglado/1-1.jpeg',
-    afterImage: '/arreglado/1-2.jpeg',
+    beforeImage: `${TESTIMONIALS_IMAGE_PATH}/case-01-before.jpeg`,
+    afterImage: `${TESTIMONIALS_IMAGE_PATH}/case-01-after.jpeg`,
   },
   {
     id: 'testimonial-02',
     quote:
       '"Mi mayor miedo era que se notara falso, pero el color y la forma son perfectos. Valió cada centavo invertido en mi salud."',
-    beforeImage: '/arreglado/2-1.jpeg',
-    afterImage: '/arreglado/2-2.jpeg',
+    beforeImage: `${TESTIMONIALS_IMAGE_PATH}/case-02-before.jpeg`,
+    afterImage: `${TESTIMONIALS_IMAGE_PATH}/case-02-after.jpeg`,
   },
   {
     id: 'testimonial-03',
     quote:
       '"La atención al detalle es asombrosa. Desde el primer día pude comer con total normalidad y sin ninguna sensibilidad."',
-    beforeImage: '/arreglado/3-1.jpeg',
-    afterImage: '/arreglado/3-2.jpeg',
+    beforeImage: `${TESTIMONIALS_IMAGE_PATH}/case-03-before.jpeg`,
+    afterImage: `${TESTIMONIALS_IMAGE_PATH}/case-03-after.jpeg`,
   },
   {
     id: 'testimonial-04',
     quote:
       '"El cambio fue notable desde la primera sesión. Hoy sonrío con seguridad y con un resultado totalmente natural."',
-    beforeImage: '/arreglado/4-1.jpeg',
-    afterImage: '/arreglado/4-2.jpeg',
+    beforeImage: `${TESTIMONIALS_IMAGE_PATH}/case-04-before.jpeg`,
+    afterImage: `${TESTIMONIALS_IMAGE_PATH}/case-04-after.jpeg`,
   },
   {
     id: 'testimonial-05',
     quote:
       '"Ahora siento mi sonrisa más armónica y funcional. El antes y después superó completamente mis expectativas."',
-    beforeImage: '/arreglado/5-1.jpeg',
-    afterImage: '/arreglado/5-2.jpeg',
+    beforeImage: `${TESTIMONIALS_IMAGE_PATH}/case-05-before.jpeg`,
+    afterImage: `${TESTIMONIALS_IMAGE_PATH}/case-05-after.jpeg`,
   },
   {
     id: 'testimonial-06',
     quote:
       '"El resultado final quedó uniforme y natural. El acompañamiento durante todo el proceso fue impecable."',
-    beforeImage: '/arreglado/6-1.jpeg',
-    afterImage: '/arreglado/6-2.jpeg',
+    beforeImage: `${TESTIMONIALS_IMAGE_PATH}/case-06-before.jpeg`,
+    afterImage: `${TESTIMONIALS_IMAGE_PATH}/case-06-after.jpeg`,
   },
 ];
 
@@ -217,7 +223,7 @@ export const mediaAltText = {
 };
 
 export const media = {
-  heroDoctor: heroImage,
-  profileInstruments: profileImage,
+  heroDoctor: `${LANDING_IMAGE_PATH}/hero-doctor.jpg`,
+  profileInstruments: `${LANDING_IMAGE_PATH}/profile-instruments.jpg`,
   videoEmbed: 'https://fast.wistia.net/embed/iframe/b6rjwbs90l',
 };

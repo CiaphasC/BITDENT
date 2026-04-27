@@ -1,4 +1,3 @@
-import footerLogo from '../../../../assets/logo.png';
 import {
   brandContent,
   footerContent,
@@ -16,7 +15,7 @@ export const FooterSection = () => (
             aria-hidden="true"
             className="mt-1 h-10 w-10 object-contain"
             decoding="async"
-            src={footerLogo}
+            src={brandContent.logoSrc}
           />
           <div>
             <h3 className="mb-2 text-2xl font-display font-semibold tracking-[0.15em] text-white">

@@ -36,40 +36,41 @@ Landing page moderna y de alto impacto visual para **BITDENT**, clínica dental 
 ## 📁 Arquitectura del Proyecto
 
 ```
-src/
-├── main.tsx                          # Punto de entrada
-├── app/
-│   ├── App.tsx                       # Componente raíz
-│   └── styles/
-│       └── global.css                # Estilos globales y tema personalizado
-├── features/
-│   └── landing/
-│       ├── components/               # Componentes de la landing page
-│       │   ├── LandingPage.tsx       # Contenedor principal y orquestador
-│       │   ├── NavBar.tsx            # Navegación con efecto glassmorphic
-│       │   ├── HeroSection.tsx       # Hero con escena 3D y modal de video
-│       │   ├── BenefitsSection.tsx   # Tarjetas de beneficios del tratamiento
-│       │   ├── FocusSection.tsx      # Perfil del paciente con escena de niebla
-│       │   ├── TestimonialsSection.tsx # Carrusel de antes/después
-│       │   ├── CtaSection.tsx        # Llamada a la acción
-│       │   ├── FooterSection.tsx     # Pie de página con redes sociales
-│       │   └── VideoModal.tsx        # Modal de reproducción de video
-│       ├── hooks/                    # Hooks personalizados
-│       │   ├── useAutoSlider.ts      # Control de carrusel automático
-│       │   ├── useFogScene.ts        # Escena 3D de niebla animada
-│       │   ├── useHeroKnotScene.ts   # Escena 3D del nudo toroidal
-│       │   ├── useLandingAnimations.ts # Animaciones GSAP globales
-│       │   └── useScrollProgress.ts  # Barra de progreso de scroll
-│       ├── data/
-│       │   └── content.ts            # Datos de contenido centralizados
-│       └── types/
-│           └── content.ts            # Interfaces y tipos TypeScript
-├── shared/
-│   └── ui/
-│       ├── icons.tsx                 # Iconos SVG personalizados (11+)
-│       ├── LuxuryButton.tsx          # Botón con variantes solid/outline
-│       └── SectionHeading.tsx        # Encabezado reutilizable de secciones
-└── assets/                           # Recursos estáticos
+.
+├── public/
+│   ├── images/
+│   │   ├── brand/                    # Logos e imagen social
+│   │   ├── landing/                  # Imagenes de hero y secciones
+│   │   └── testimonials/             # Antes/despues por caso
+│   └── ...                           # Otros estaticos publicos
+└── src/
+    ├── main.tsx                      # Punto de entrada
+    ├── app/
+    │   ├── App.tsx                   # Componente raíz
+    │   └── styles/
+    │       └── global.css            # Estilos globales y tema personalizado
+    ├── features/
+    │   └── landing/
+    │       ├── components/           # Componentes de la landing page
+    │       │   ├── LandingPage.tsx   # Contenedor principal y orquestador
+    │       │   ├── NavBar.tsx        # Navegación con efecto glassmorphic
+    │       │   ├── HeroSection.tsx   # Hero con escena 3D y modal de video
+    │       │   ├── BenefitsSection.tsx
+    │       │   ├── FocusSection.tsx
+    │       │   ├── TestimonialsSection.tsx
+    │       │   ├── CtaSection.tsx
+    │       │   ├── FooterSection.tsx
+    │       │   └── VideoModal.tsx
+    │       ├── hooks/                # Hooks personalizados
+    │       ├── data/
+    │       │   └── content.ts        # Copy, enlaces y rutas absolutas a imagenes
+    │       └── types/
+    │           └── content.ts
+    └── shared/
+        └── ui/
+            ├── icons.tsx
+            ├── LuxuryButton.tsx
+            └── SectionHeading.tsx
 ```
 
 ---
@@ -193,4 +194,3 @@ npm run lint
 ## 📄 Licencia
 
 Todos los derechos reservados © BITDENT
-

@@ -72,7 +72,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: var(--bitdent-wordmark-url, url('/brand/logo-text.png'));
+  background-image: var(--bitdent-wordmark-url, url('/images/brand/logo-wordmark.png'));
   background-position: left center;
   background-repeat: no-repeat;
   background-size: contain;
