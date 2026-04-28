@@ -1,19 +1,28 @@
 import clsx from 'clsx';
+import { useRef } from 'react';
 
 import {
   testimonials,
   testimonialsSectionContent,
 } from '@/features/landing/data/content';
 import { useAutoSlider } from '@/features/landing/hooks/useAutoSlider';
+import { useInView } from '@/features/landing/hooks/useInView';
 import { ChevronLeftIcon, ChevronRightIcon, QuoteIcon } from '@/shared/ui/icons';
 
 export const TestimonialsSection = () => {
-  const { currentIndex, goTo, next, previous } = useAutoSlider(testimonials.length, 6000);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { rootMargin: '200px 0px' });
+  const { currentIndex, goTo, next, previous } = useAutoSlider(
+    testimonials.length,
+    6000,
+    isInView,
+  );
 
   return (
     <section
-      className="relative overflow-hidden bg-midnight-900 py-32 text-white"
+      className="landing-section relative overflow-hidden bg-midnight-900 py-32 text-white"
       id="testimonios"
+      ref={sectionRef}
     >
       <div
         className="absolute inset-0 opacity-5"

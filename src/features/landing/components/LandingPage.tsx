@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { BenefitsSection } from '@/features/landing/components/BenefitsSection';
 import { CtaSection } from '@/features/landing/components/CtaSection';
 import { FocusSection } from '@/features/landing/components/FocusSection';
@@ -9,16 +11,17 @@ import { useLandingAnimations } from '@/features/landing/hooks/useLandingAnimati
 import { useScrollProgress } from '@/features/landing/hooks/useScrollProgress';
 
 export const LandingPage = () => {
-  const scrollProgress = useScrollProgress();
+  const progressRef = useRef<HTMLDivElement>(null);
 
+  useScrollProgress(progressRef);
   useLandingAnimations();
 
   return (
     <>
       <div
-        className="fixed top-0 left-0 z-[60] h-[2px] bg-verde-500 transition-all duration-300"
+        className="fixed top-0 left-0 z-[60] h-[2px] w-full origin-left scale-x-0 bg-verde-500"
         id="scroll-progress"
-        style={{ width: `${scrollProgress}%` }}
+        ref={progressRef}
       />
 
       <NavBar />

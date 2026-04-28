@@ -1,24 +1,44 @@
-import { useEffect, useState } from 'react';
+import { useEffect, type RefObject } from 'react';
 
-export const useScrollProgress = () => {
-  const [progress, setProgress] = useState(0);
-
+export const useScrollProgress = (progressRef: RefObject<HTMLDivElement | null>) => {
   useEffect(() => {
+    let frameId = 0;
+
     const updateProgress = () => {
+      frameId = 0;
+
+      const progressBar = progressRef.current;
+      if (!progressBar) {
+        return;
+      }
+
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const fullHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const value = fullHeight > 0 ? (winScroll / fullHeight) * 100 : 0;
-      setProgress(value);
+
+      progressBar.style.transform = `scaleX(${value / 100})`;
+    };
+
+    const requestProgressUpdate = () => {
+      if (frameId !== 0) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(updateProgress);
     };
 
     updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('scroll', requestProgressUpdate, { passive: true });
+    window.addEventListener('resize', requestProgressUpdate, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', updateProgress);
-    };
-  }, []);
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId);
+      }
 
-  return progress;
+      window.removeEventListener('scroll', requestProgressUpdate);
+      window.removeEventListener('resize', requestProgressUpdate);
+    };
+  }, [progressRef]);
 };

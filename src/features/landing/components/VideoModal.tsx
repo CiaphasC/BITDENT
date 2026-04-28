@@ -37,7 +37,6 @@ const buildVideoSource = (source: string, shouldAutoplay: boolean) => {
   }
 };
 
-const VIDEO_IFRAME_BASE = buildVideoSource(media.videoEmbed, false);
 const VIDEO_IFRAME_AUTOPLAY = buildVideoSource(media.videoEmbed, true);
 
 export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
@@ -46,6 +45,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
   const modalContentRef = useRef<HTMLDivElement | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement | null>(null);
   const modalCoverRef = useRef<HTMLImageElement | null>(null);
+  const hasAnimatedOpenRef = useRef(false);
 
   useEffect(() => {
     if (!isOpen) {
@@ -73,6 +73,10 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
     let isDisposed = false;
 
     const runAnimation = async () => {
+      if (!isOpen && !hasAnimatedOpenRef.current) {
+        return;
+      }
+
       const { default: gsap } = await import('gsap');
       if (isDisposed) {
         return;
@@ -106,6 +110,7 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
       timeline = activeTimeline;
 
       if (isOpen) {
+        hasAnimatedOpenRef.current = true;
         document.body.style.overflow = 'hidden';
         gsap.set(modalRoot, { display: 'block' });
 
@@ -184,8 +189,6 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
     [],
   );
 
-  const activeVideoSource = isOpen ? VIDEO_IFRAME_AUTOPLAY : VIDEO_IFRAME_BASE;
-
   return (
     <div
       className="fixed inset-0 z-[100]"
@@ -224,13 +227,16 @@ export const VideoModal = ({ isOpen, originRef, onClose }: VideoModalProps) => {
             src={media.heroDoctor}
           />
 
-          <iframe
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            className="absolute inset-0 z-0 h-full w-full"
-            src={activeVideoSource}
-            title={mediaAltText.videoTitle}
-          />
+          {isOpen ? (
+            <iframe
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+              className="absolute inset-0 z-0 h-full w-full"
+              loading="lazy"
+              src={VIDEO_IFRAME_AUTOPLAY}
+              title={mediaAltText.videoTitle}
+            />
+          ) : null}
         </div>
       </div>
     </div>

@@ -14,9 +14,10 @@ export const FocusSection = () => {
   useFogScene(fogContainerRef);
 
   return (
-    <section className="relative overflow-hidden bg-white py-20 md:py-32" id="enfoque">
+    <section className="landing-section relative overflow-hidden bg-white py-20 md:py-32" id="enfoque">
       <div
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-85"
+        aria-hidden="true"
+        className="focus-fog-layer pointer-events-none absolute inset-0 z-0 h-full w-full opacity-95"
         id="fog-canvas-container"
         ref={fogContainerRef}
       />
@@ -57,6 +58,8 @@ export const FocusSection = () => {
             <img
               alt={mediaAltText.profileInstruments}
               className="h-[360px] w-full object-cover object-[center_28%] shadow-elevated sm:h-[440px] lg:h-full lg:object-center"
+              decoding="async"
+              loading="lazy"
               src={media.profileInstruments}
             />
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-midnight-900/50 to-transparent lg:rounded-none" />

@@ -6,7 +6,7 @@ import {
 import { FacebookIcon, InstagramIcon } from '@/shared/ui/icons';
 
 export const FooterSection = () => (
-  <footer className="bg-midnight-900 py-16">
+  <footer className="landing-section bg-midnight-900 py-16">
     <div className="mx-auto max-w-[90rem] px-8 md:px-16">
       <div className="mb-16 flex flex-col items-start justify-between gap-10 md:flex-row md:items-center">
         <div className="flex items-start gap-3">
@@ -15,7 +15,9 @@ export const FooterSection = () => (
             aria-hidden="true"
             className="mt-1 h-10 w-10 object-contain"
             decoding="async"
+            height={40}
             src={brandContent.logoSrc}
+            width={40}
           />
           <div>
             <h3 className="mb-2 text-2xl font-display font-semibold tracking-[0.15em] text-white">

@@ -1,5 +1,10 @@
 import { useEffect, type RefObject } from 'react';
 
+import {
+  prefersReducedMotion,
+  scheduleVisibleIdleWork,
+} from '@/features/landing/utils/performance';
+
 export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>) => {
   useEffect(() => {
     const container = containerRef.current;
@@ -10,11 +15,26 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
     let isDisposed = false;
     let frameId = 0;
     let observer: IntersectionObserver | undefined;
-    let handleVisibilityChange: (() => void) | undefined;
+    let resizeObserver: ResizeObserver | undefined;
+    let removeResizeListener: (() => void) | undefined;
     let cleanupScene: (() => void) | undefined;
 
     const initScene = async () => {
-      const THREE = await import('three');
+      const [
+        { Scene },
+        { PerspectiveCamera },
+        { WebGLRenderer },
+        { TorusKnotGeometry },
+        { MeshBasicMaterial },
+        { Mesh },
+      ] = await Promise.all([
+        import('three/src/scenes/Scene.js'),
+        import('three/src/cameras/PerspectiveCamera.js'),
+        import('three/src/renderers/WebGLRenderer.js'),
+        import('three/src/geometries/TorusKnotGeometry.js'),
+        import('three/src/materials/MeshBasicMaterial.js'),
+        import('three/src/objects/Mesh.js'),
+      ]);
 
       if (isDisposed) {
         return;
@@ -24,24 +44,25 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
 
       const width = Math.max(container.clientWidth, 1);
       const height = Math.max(container.clientHeight, 1);
+      const shouldReduceMotion = prefersReducedMotion();
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+      const scene = new Scene();
+      const camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
 
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      const renderer = new WebGLRenderer({ alpha: true, antialias: true });
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
 
-      const geometry = new THREE.TorusKnotGeometry(12, 3.5, 120, 32);
-      const material = new THREE.MeshBasicMaterial({
+      const geometry = new TorusKnotGeometry(12, 3.5, 120, 32);
+      const material = new MeshBasicMaterial({
         color: 0x2d6a4f,
         wireframe: true,
         transparent: true,
         opacity: 0.24,
       });
 
-      const mesh = new THREE.Mesh(geometry, material);
+      const mesh = new Mesh(geometry, material);
       scene.add(mesh);
 
       camera.position.z = 35;
@@ -57,15 +78,21 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
           return;
         }
 
-        mesh.rotation.x += 0.0005;
-        mesh.rotation.y += 0.001;
+        if (!shouldReduceMotion) {
+          mesh.rotation.x += 0.0005;
+          mesh.rotation.y += 0.001;
+        }
+
         renderer.render(scene, camera);
 
-        frameId = window.requestAnimationFrame(renderFrame);
+        if (!shouldReduceMotion) {
+          frameId = window.requestAnimationFrame(renderFrame);
+        }
       };
 
       const ensureAnimationState = () => {
-        const shouldAnimate = isInViewport && isPageVisible && !isDisposed;
+        const shouldAnimate =
+          isInViewport && isPageVisible && !isDisposed && !shouldReduceMotion;
 
         if (shouldAnimate && frameId === 0) {
           frameId = window.requestAnimationFrame(renderFrame);
@@ -75,6 +102,10 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
         if (!shouldAnimate && frameId !== 0) {
           window.cancelAnimationFrame(frameId);
           frameId = 0;
+        }
+
+        if (shouldReduceMotion) {
+          renderer.render(scene, camera);
         }
       };
 
@@ -90,9 +121,10 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
         camera.updateProjectionMatrix();
         renderer.setSize(nextWidth, nextHeight);
         mesh.position.x = window.innerWidth > 1024 ? -10 : 0;
+        renderer.render(scene, camera);
       };
 
-      handleVisibilityChange = () => {
+      const handleVisibilityChange = () => {
         isPageVisible = !document.hidden;
         ensureAnimationState();
       };
@@ -106,16 +138,25 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
       );
 
       observer.observe(container);
-      window.addEventListener('resize', handleResize);
+
+      if (typeof globalThis.ResizeObserver === 'function') {
+        resizeObserver = new globalThis.ResizeObserver(handleResize);
+        resizeObserver.observe(container);
+      } else {
+        globalThis.addEventListener('resize', handleResize, { passive: true });
+        removeResizeListener = () => {
+          globalThis.removeEventListener('resize', handleResize);
+        };
+      }
+
       document.addEventListener('visibilitychange', handleVisibilityChange);
+      renderer.render(scene, camera);
       ensureAnimationState();
 
       cleanupScene = () => {
-        window.removeEventListener('resize', handleResize);
-        if (handleVisibilityChange) {
-          document.removeEventListener('visibilitychange', handleVisibilityChange);
-        }
-
+        resizeObserver?.disconnect();
+        removeResizeListener?.();
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
         observer?.disconnect();
 
         if (frameId !== 0) {
@@ -133,10 +174,13 @@ export const useHeroKnotScene = (containerRef: RefObject<HTMLDivElement | null>)
       };
     };
 
-    void initScene();
+    const cancelDeferredInit = scheduleVisibleIdleWork(container, () => {
+      void initScene();
+    });
 
     return () => {
       isDisposed = true;
+      cancelDeferredInit();
       cleanupScene?.();
       container.innerHTML = '';
     };

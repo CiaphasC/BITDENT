@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { heroContent, media, mediaAltText } from '@/features/landing/data/content';
 import { useHeroKnotScene } from '@/features/landing/hooks/useHeroKnotScene';
@@ -11,9 +11,12 @@ export const HeroSection = () => {
   const threeCanvasRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const openVideoModal = () => {
+  const openVideoModal = useCallback(() => {
     setIsVideoOpen(true);
-  };
+  }, []);
+  const closeVideoModal = useCallback(() => {
+    setIsVideoOpen(false);
+  }, []);
 
   useHeroKnotScene(threeCanvasRef);
 
@@ -102,7 +105,10 @@ export const HeroSection = () => {
           <img
             alt={mediaAltText.heroDoctor}
             className="absolute top-[-20%] left-0 h-[140%] w-full object-cover object-center brightness-[0.55] contrast-[1.15] saturate-[0.4]"
+            decoding="async"
+            fetchPriority="high"
             id="video-parallax"
+            loading="eager"
             src={media.heroDoctor}
           />
 
@@ -142,9 +148,7 @@ export const HeroSection = () => {
 
       <VideoModal
         isOpen={isVideoOpen}
-        onClose={() => {
-          setIsVideoOpen(false);
-        }}
+        onClose={closeVideoModal}
         originRef={videoSectionRef}
       />
     </>

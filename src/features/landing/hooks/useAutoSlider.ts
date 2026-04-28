@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export const useAutoSlider = (totalSlides: number, intervalMs = 6000) => {
+export const useAutoSlider = (
+  totalSlides: number,
+  intervalMs = 6000,
+  isEnabled = true,
+) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const next = useCallback(() => {
@@ -29,18 +33,48 @@ export const useAutoSlider = (totalSlides: number, intervalMs = 6000) => {
   );
 
   useEffect(() => {
-    if (totalSlides <= 1) {
+    if (totalSlides <= 1 || !isEnabled) {
       return;
     }
 
-    const intervalId = window.setInterval(() => {
-      setCurrentIndex((previousIndex) => (previousIndex + 1) % totalSlides);
-    }, intervalMs);
+    let intervalId = 0;
+
+    const clearSliderInterval = () => {
+      if (intervalId !== 0) {
+        window.clearInterval(intervalId);
+        intervalId = 0;
+      }
+    };
+
+    const startSliderInterval = () => {
+      clearSliderInterval();
+
+      if (document.hidden) {
+        return;
+      }
+
+      intervalId = window.setInterval(() => {
+        setCurrentIndex((previousIndex) => (previousIndex + 1) % totalSlides);
+      }, intervalMs);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearSliderInterval();
+        return;
+      }
+
+      startSliderInterval();
+    };
+
+    startSliderInterval();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      window.clearInterval(intervalId);
+      clearSliderInterval();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [currentIndex, intervalMs, totalSlides]);
+  }, [intervalMs, isEnabled, totalSlides]);
 
   return {
     currentIndex,

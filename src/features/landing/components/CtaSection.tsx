@@ -3,7 +3,7 @@ import { LuxuryButton } from '@/shared/ui/LuxuryButton';
 import { WhatsAppIcon } from '@/shared/ui/icons';
 
 export const CtaSection = () => (
-  <section className="relative border-b border-stone-200 bg-pearl py-40" id="agendar">
+  <section className="landing-section relative border-b border-stone-200 bg-pearl py-40" id="agendar">
     <div className="scroll-reveal mx-auto max-w-4xl px-8 text-center">
       <h2 className="mb-8 text-5xl leading-[1.1] font-serif font-light text-midnight-900 md:text-6xl lg:text-7xl">
         {ctaSectionContent.titleLine1} <br />

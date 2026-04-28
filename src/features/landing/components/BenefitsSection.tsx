@@ -23,7 +23,7 @@ const benefitIconMap: Record<BenefitIcon, ReactElement> = {
 };
 
 export const BenefitsSection = () => (
-  <section className="border-b border-stone-200 bg-pearl py-24" id="beneficios">
+  <section className="landing-section border-b border-stone-200 bg-pearl py-24" id="beneficios">
     <div className="mx-auto max-w-[90rem] px-8 md:px-16">
       <SectionHeading
         align="center"
