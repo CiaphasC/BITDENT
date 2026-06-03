@@ -225,5 +225,5 @@ export const mediaAltText = {
 export const media = {
   heroDoctor: `${LANDING_IMAGE_PATH}/hero-doctor.jpg`,
   profileInstruments: `${LANDING_IMAGE_PATH}/profile-instruments.jpg`,
-  videoEmbed: 'https://fast.wistia.net/embed/iframe/b6rjwbs90l',
+  videoEmbed: 'https://contactorebelpro.wistia.com/s/rlqjcvry6fudkc7',
 };
