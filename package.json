@@ -35,6 +35,6 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.0",
     "vite": "^8.0.1",
-    "@quoin/react": "^0.1.0"
+    "@quoin/react": "https://quoin-mini-o.vercel.app/api/public/kit/quoin-react-0.2.0.tgz"
   }
 }
